@@ -78,11 +78,24 @@
 	at the command line in the correct folder to see if you
 	pass it.
 	*/
-	var heuristic = function(state, maximizingPlayer){
-		//Need some code here.
-	}
+	var heuristic = function(state, Player){
+		var minimizingPlayer = (Player === "x")? "o" : "x";
+		var score = 0;
+		var scoreOfTwoLiner = 2;
+		var scoreOfThreeLiner = 3;
 
+		if (Player === "x") {
+			score += state.numLines(3,Player)*scoreOfThreeLiner;
+			score += state.numLines(2,Player)*scoreOfTwoLiner;
+			return score;
+		}
 
+		else {
+			score += state.numLines(3, minimizingPlayer)*scoreOfThreeLiner;
+			score += state.numLines(2, minimizingPlayer)*scoreOfTwoLiner;
+			return -score;
+		}
+	};
 
 	/*
     function minimax(state, depth, maximizingPlayer)
